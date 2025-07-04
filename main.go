@@ -7,10 +7,22 @@ import (
 	"net/http"
 	"github.com/joho/godotenv"
 	"github.com/youngabreu1/knowledge-base.git/internal/gemini"
+	"github.com/youngabreu1/knowledge-base.git/internal/knowledge"
 )
 
 func apiHandler(w http.ResponseWriter, r *http.Request) {
 	// query?prompt=something
+	knowledge, err := knowledge.LoadFromDirectory("./guides")
+	if err !=nil {
+		log.Printf("Error loading knowlodge base: ", err)
+		http.Error(w,"Could not load knowledge base.", http.StatusInternalServerError)
+		return
+	} 
+	
+	log.Println("Knowledge base loaded succesfully...")
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	fmt.Fprint(w, knowledge)
+
 	prompt := r.URL.Query().Get("prompt")
 	if prompt == "" {
 		http.Error(w, "Error: 'prompt' parameter is required.", http.StatusBadRequest)

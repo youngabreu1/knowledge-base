@@ -1,0 +1,7 @@
+Planner Manual v3.0
+
+Chapter 1: Introduction
+The Planner is the commercial management software from Playlist Soluções. It allows for the control of contracts, advertisers, and the creation of programming schedules.
+
+Chapter 2: Programming Models
+To create a new model, navigate to Programming > Models. A model defines the structure of commercial and musical blocks throughout the day.

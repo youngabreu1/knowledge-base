@@ -1,0 +1,4 @@
+Sync Service Manual v1.2
+
+Sync Service is the application responsible for synchronizing the schedule from Planner with the Playlist Digital software.
+It monitors the maps folder and automatically downloads the necessary media for the schedule's execution. The default configuration is done via a web interface on port 5000.
