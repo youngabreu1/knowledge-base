@@ -40,3 +40,32 @@ func LoadFromDirectory(dirPath string) (string, error) {
 
 	return knowledgeBase.String(), nil
 }
+
+func RetrieveContext(prompt, knowledgeBase string) string {
+	keywords := strings.Fields(strings.ToLower(prompt))
+
+	paragraphs := strings.Split(knowledgeBase, "\n")
+
+	var relevantContext strings.Builder
+	addedParagraphs := make(map[string]bool)
+
+	for _, p := range paragraphs {
+		if len(strings.TrimSpace(p)) == 0 || strings.Contains(p, "---") {
+			continue
+		}
+
+		pLower := strings.ToLower(p)
+		
+		for _, keyword := range keywords {
+			if len(keyword) > 3 && strings.Contains(pLower, keyword) {
+				if !addedParagraphs[p] {
+					relevantContext.WriteString(p)
+					relevantContext.WriteString("\n")
+					addedParagraphs[p] = true
+				}
+			}
+		}
+	}
+
+	return relevantContext.String()
+}
