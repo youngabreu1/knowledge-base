@@ -16,7 +16,7 @@ func main() {
 		log.Fatal("Error: Could not load .env file.")
 	}
 
-	http.HandleFunc("/query", apiHandler)
+	http.HandleFunc("/query", api.ApiHandler)
 
 	port := os.Getenv("PORT")
 	log.Printf("Server started. Listening on port %s", port)
