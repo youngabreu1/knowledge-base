@@ -1,9 +1,8 @@
 package domain
 
 type Page struct {
-	id int16
-	book_id int8
-	name string
-	description string
+	Id int16
+	Book_id int8
+	Name string
 	Text string
 }

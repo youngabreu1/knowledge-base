@@ -45,15 +45,22 @@ func main() {
     }
     log.Println("Weaviate connection succeed: ", weaviateService)
 
+	 err = weaviateService.EnsureClassExists(ctx, "Page")
+    if err != nil {
+        log.Fatalf("Failed to ensure Weaviate class exists: %v", err)
+    }
+
 	pageRepo := repository.NewPageRepository(db)
 	pageRepo.FindAll()
     log.Println("Page repo created successfully.", pageRepo)
-	http.HandleFunc("/query", api.ApiHandler)
-	
+
+
+	apiHandler := api.NewApiHandler(geminiService)
+	http.HandleFunc("/query", apiHandler.HandleQuery)
+	log.Printf("Endpoint available at: http://localhost:%s/query", port)
 	err = http.ListenAndServe(":"+port, nil)
 	if (err != nil) {
 		log.Fatalf("Fatal error starting server: %v", err)
 	}
-	log.Printf("Server started. Listening on port %s", port)
-	log.Printf("Endpoint available at: http://localhost:%s/query", port)
+	
 }

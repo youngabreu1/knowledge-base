@@ -19,7 +19,7 @@ func NewPageRepository(db *sql.DB) PageRepository{
 	}
 }
 func (r *mysqlPageRepository) FindAll() ([]domain.Page, error) {
-	rows, err := r.db.Query("SELECT text FROM pages")
+	rows, err := r.db.Query("SELECT id, book_id, name, text FROM pages")
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func (r *mysqlPageRepository) FindAll() ([]domain.Page, error) {
 	
 	for rows.Next() {
 		var page domain.Page
-		if err := rows.Scan(&page.Text); err != nil {
+		if err := rows.Scan(&page.Id, &page.Book_id, &page.Name, &page.Text); err != nil {
 			return nil, err
 		}
 		pages = append(pages, page)
