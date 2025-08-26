@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	_ "github.com/youngabreu1/knowledge-base.git/internal/gemini"
+
+	"github.com/youngabreu1/knowledge-base.git/internal/gemini"
 )
 
 type ApiHandler struct {
@@ -25,10 +26,10 @@ func (h *ApiHandler) HandleQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Printf("Prompt received: \"%s\"", prompt)
 
-	context := "Nenhum contexto encontrado na base de dados vetorial."
+	context := "Any context was found."
 
 	finalPrompt := fmt.Sprintf(`
-		You will be the AI ​​agent for Playlist Software Solutions. You will be the first contact to try to solve a problem sent by the customer. Another AI Agent will send you the costumer question and you have to try to solve it. This message has a context in which we searched our internal documentation to help you answer the question. Based on this document, reply the costumer question, if you're not able to reply the question, say that isn't in your documentation. Answer in PT-BR
+		You will be the AI ​​agent for Playlist Software Solutions. You will be the first contact to try to solve a problem sent by the customer. Another AI Agent will send you the costumer question and you have to try to solve it. This message has a context in which we searched our internal documentation to help you answer the question. Based on this document, reply the costumer question, if you're not able to reply the question, say that isn't in your documentation. Do not provide information there's not in your context. Answer in PT-BR
 
 		Context:
 		%s
