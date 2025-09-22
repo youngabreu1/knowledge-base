@@ -65,7 +65,7 @@ It is important to note that the project was developed using Go v1.21 or higher.
 Follow the steps below:
 
 ### 1️⃣ Clone this repository:
-git clone [YOUR-REPOSITORY-URL]
+git clone [https://github.com/youngabreu1/knowledge-base]
 
 ### 2️⃣ Start Weaviate with Docker:
 Navigate to the project's root folder and run the command:
